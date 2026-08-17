@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import type { Product } from "@/types/product";
-import { ConfirmDeleteProduct } from "./ConfirmDeleteProduct";
+import { useLanguage } from "@/i18n/LanguageContext";
+import dynamic from "next/dynamic";
+
+const ConfirmDeleteProduct = dynamic(() =>
+  import("./ConfirmDeleteProduct").then((mod) => mod.ConfirmDeleteProduct),
+);
 
 type ProductRowProps = {
   product: Product;
@@ -10,6 +15,7 @@ type ProductRowProps = {
 
 export const ProductRow = ({ product }: ProductRowProps) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const { t } = useLanguage();
   const guaranteeStart = new Date(product.guaranteeStart);
   const guaranteeEnd = new Date(product.guaranteeEnd);
 
@@ -19,15 +25,15 @@ export const ProductRow = ({ product }: ProductRowProps) => {
         <p>{product.title}</p>
         <p>{product.type}</p>
         <p>
-          с {guaranteeStart.toLocaleDateString("ru-RU")} по{" "}
-          {guaranteeEnd.toLocaleDateString("ru-RU")}
+          {t.products.from} {guaranteeStart.toLocaleDateString("ru-RU")}{" "}
+          {t.products.to} {guaranteeEnd.toLocaleDateString("ru-RU")}
         </p>
         <p>{product.priceUSD} $</p>
         <p>{product.priceUAH} ₴</p>
         <p>{product.Order?.title}</p>
       </div>
 
-      <button onClick={() => setIsDeleteOpen(true)}>Удалить</button>
+      <button onClick={() => setIsDeleteOpen(true)}>{t.common.delete}</button>
 
       {isDeleteOpen && (
         <ConfirmDeleteProduct

@@ -1,18 +1,20 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
-const menuItems = [
-  { label: 'Приход', href: '/orders' },
-  { label: 'Группы', href: '/groups' },
-  { label: 'Продукты', href: '/products' },
-  { label: 'Пользователи', href: '/users' },
-  { label: 'Настройки', href: '/settings' },
-];
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export const Sidebar = () => {
   const pathname = usePathname();
+  const { t, language, changeLanguage } = useLanguage();
+
+  const menuItems = [
+    { label: t.nav.orders, href: "/orders" },
+    { label: t.nav.groups, href: "/groups" },
+    { label: t.nav.products, href: "/products" },
+    { label: t.nav.users, href: "/users" },
+    { label: t.nav.settings, href: "/settings" },
+  ];
 
   return (
     <aside>
@@ -20,11 +22,15 @@ export const Sidebar = () => {
         <Link
           key={item.href}
           href={item.href}
-          className={pathname === item.href ? 'active' : ''}
+          className={pathname === item.href ? "active" : ""}
         >
           {item.label}
         </Link>
       ))}
+
+      <button onClick={() => changeLanguage(language === "ru" ? "en" : "ru")}>
+        {language === "ru" ? "EN" : "RU"}
+      </button>
     </aside>
   );
 };

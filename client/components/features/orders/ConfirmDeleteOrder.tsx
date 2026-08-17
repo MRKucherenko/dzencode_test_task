@@ -2,6 +2,7 @@
 
 import { useDeleteOrderMutation } from "@/store/api/ordersApi";
 import { Modal } from "@/components/ui/Modal/Modal";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 type ConfirmDeleteOrderProps = {
   orderId: number;
@@ -15,6 +16,7 @@ export const ConfirmDeleteOrder = ({
   onClose,
 }: ConfirmDeleteOrderProps) => {
   const [deleteOrder, { isLoading }] = useDeleteOrderMutation();
+  const { t } = useLanguage();
 
   const handleDelete = async () => {
     await deleteOrder(orderId);
@@ -23,10 +25,10 @@ export const ConfirmDeleteOrder = ({
 
   return (
     <Modal onClose={onClose}>
-      <p>Вы уверены, что хотите удалить {orderTitle};?</p>
-      <button onClick={onClose}>Отменить</button>
+      <p>{t.orders.confirmDelete} {orderTitle}?</p>
+      <button onClick={onClose}>{t.common.cancel}</button>
       <button onClick={handleDelete} disabled={isLoading}>
-        Удалить
+        {t.common.delete}
       </button>
     </Modal>
   );

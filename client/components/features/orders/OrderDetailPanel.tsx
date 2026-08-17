@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "@/i18n/LanguageContext";
 import { useGetOrderByIdQuery } from "@/store/api/ordersApi";
 
 type OrderDetailPanelProps = {
@@ -10,9 +11,10 @@ export const OrderDetailPanel = ({ orderId }: OrderDetailPanelProps) => {
   const { data: order } = useGetOrderByIdQuery(orderId ?? 0, {
     skip: orderId === null,
   });
+  const { t } = useLanguage();
 
   if (orderId === null) {
-    return <> Выберите позицию из списка слева </>;
+    return <>{t.orders.selectFromList}</>;
   }
 
   return (
@@ -23,9 +25,9 @@ export const OrderDetailPanel = ({ orderId }: OrderDetailPanelProps) => {
         <div key={product.id}>
           <img src={product.photo} alt="Photo" />
           <p>{product.title}</p>
-          <p>SN-{product.serialNumber}</p>
-          <p>Цена: {product.priceUAH} ₴</p>
-          <p>Цена: {product.priceUSD} $</p>
+          <p>{t.products.serialNumber}{product.serialNumber}</p>
+          <p>{t.orders.price} {product.priceUAH} ₴</p>
+          <p>{t.orders.price} {product.priceUSD} $</p>
         </div>
       ))}
     </>

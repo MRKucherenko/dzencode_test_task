@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import type { Order } from "@/types/order";
-import { ConfirmDeleteOrder } from "./ConfirmDeleteOrder";
+import { useLanguage } from "@/i18n/LanguageContext";
+import dynamic from "next/dynamic";
+
+const ConfirmDeleteOrder = dynamic(() =>
+  import("./ConfirmDeleteOrder").then((mod) => mod.ConfirmDeleteOrder),
+);
 
 type OrderListItemProps = {
   order: Order;
@@ -11,20 +16,23 @@ type OrderListItemProps = {
 
 export const OrderListItem = ({ order, onClick }: OrderListItemProps) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const { t } = useLanguage();
   const date = new Date(order.date);
 
   return (
     <div>
       <div onClick={onClick}>
         <p>{order.title}</p>
-        <p>{order.productsCount} Продукта</p>
+        <p>
+          {order.productsCount} {t.orders.productsCount}
+        </p>
         <p>{date.toLocaleDateString("ru-RU")}</p>
         <p>{order.totalPriceUSD} $</p>
         <p>{order.totalPriceUAH} ₴</p>
         <p>{order.description}</p>
       </div>
 
-      <button onClick={() => setIsDeleteOpen(true)}>Удалить</button>
+      <button onClick={() => setIsDeleteOpen(true)}>{t.common.delete}</button>
 
       {isDeleteOpen && (
         <ConfirmDeleteOrder

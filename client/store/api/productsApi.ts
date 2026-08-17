@@ -1,3 +1,4 @@
+import { ProductFormValues } from '@/lib/validators/productSchema';
 import { Product } from '@/types/product';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -34,7 +35,15 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ['Product'],
     }),
+      createProduct: builder.mutation<Product, ProductFormValues>({
+        query: (data) => ({
+          url: '',
+          method: 'POST',
+          body: data,
+        }),
+        invalidatesTags: ['Product'],
+      })
   }),
 });
 
-export const { useGetProductsQuery, useDeleteProductMutation } = productsApi;
+export const { useGetProductsQuery, useDeleteProductMutation, useCreateProductMutation } = productsApi;

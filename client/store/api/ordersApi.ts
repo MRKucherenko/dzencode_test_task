@@ -1,3 +1,4 @@
+import { Order } from '@/types/order';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const ordersApi = createApi({
@@ -7,15 +8,15 @@ export const ordersApi = createApi({
   }),
   tagTypes: ['Order'],
   endpoints: (builder) => ({
-    getOrders: builder.query({
+    getOrders: builder.query<Order[], void>({
       query: () => '',
       providesTags: ['Order']
     }),
-    getOrderById: builder.query({
+    getOrderById: builder.query<Order, number>({
       query: (id) => `/${id}`,
       providesTags: ['Order']
     }),
-    deleteOrder: builder.mutation({
+    deleteOrder: builder.mutation<void, number>({
       query: (id) => ({
         url: `/${id}`,
         method: 'DELETE'

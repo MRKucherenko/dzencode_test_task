@@ -1,5 +1,4 @@
 import { SessionCounter } from "@/components/layout/TopMenu/SessionCounter";
-import Image from "next/image";
 
 export default function Home() {
   return (

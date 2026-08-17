@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.scss";
 import { Providers } from "./providers";
+import { Sidebar } from "@/components/layout/Sidebar/Sidebar";
+import { TopMenu } from "@/components/layout/TopMenu/TopMenu";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,8 +13,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body className="min-h-full flex flex-col">
-        <Providers>{children}</Providers>
+      <body>
+        <Providers>
+          <Sidebar />
+          <TopMenu />
+          {children}
+        </Providers>
       </body>
     </html>
   );

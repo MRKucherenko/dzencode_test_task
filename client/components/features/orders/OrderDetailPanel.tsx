@@ -24,8 +24,8 @@ export const OrderDetailPanel = ({ orderId }: OrderDetailPanelProps) => {
           <img src={product.photo} alt="Photo" />
           <p>{product.title}</p>
           <p>SN-{product.serialNumber}</p>
-          <p>Цена: {product.priceUAH} UAH</p>
-          <p>Цена: {product.priceUSD} USD</p>
+          <p>Цена: {product.priceUAH} ₴</p>
+          <p>Цена: {product.priceUSD} $</p>
         </div>
       ))}
     </>

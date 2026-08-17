@@ -14,4 +14,8 @@ export type Product = {
   date: string;
   createdAt?: string;
   updatedAt?: string;
+  Order?: {
+    id: number;
+    title: string;
+  };
 };

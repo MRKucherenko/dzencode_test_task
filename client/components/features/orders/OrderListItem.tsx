@@ -20,7 +20,7 @@ export const OrderListItem = ({ order, onClick }: OrderListItemProps) => {
         <p>{order.productsCount} Продукта</p>
         <p>{date.toLocaleDateString("ru-RU")}</p>
         <p>{order.totalPriceUSD} $</p>
-        <p>{order.totalPriceUAH} UAH</p>
+        <p>{order.totalPriceUAH} ₴</p>
         <p>{order.description}</p>
       </div>
 

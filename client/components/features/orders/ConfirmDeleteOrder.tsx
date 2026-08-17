@@ -3,7 +3,7 @@
 import { useDeleteOrderMutation } from "@/store/api/ordersApi";
 import { Modal } from "@/components/ui/Modal/Modal";
 
-type ConfirmDeleteOrderPopupProps = {
+type ConfirmDeleteOrderProps = {
   orderId: number;
   orderTitle: string;
   onClose: () => void;
@@ -13,7 +13,7 @@ export const ConfirmDeleteOrder = ({
   orderId,
   orderTitle,
   onClose,
-}: ConfirmDeleteOrderPopupProps) => {
+}: ConfirmDeleteOrderProps) => {
   const [deleteOrder, { isLoading }] = useDeleteOrderMutation();
 
   const handleDelete = async () => {

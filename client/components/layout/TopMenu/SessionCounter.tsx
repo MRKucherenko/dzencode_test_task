@@ -7,9 +7,7 @@ export const SessionCounter = () => {
   const [sessionCount, setSessionCount] = useState<number>(0);
 
   useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
-      transports: ["websocket"],
-    });
+    const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
 
     socket.on("sessionCount", (count: number) => {
       setSessionCount(count);

@@ -1,5 +1,9 @@
 @import '../styles/variables';
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: $font-family-base;
@@ -198,6 +202,27 @@ body {
   border: 1px solid $color-border;
   padding: $spacing-lg;
   overflow-y: auto;
+  position: relative;
+}
+
+.order-detail__close {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  background: none;
+  border: none;
+  font-size: 16px;
+  line-height: 1;
+  color: $color-text-muted;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: $color-bg;
+    color: $color-text;
+  }
 }
 
 .order-detail__placeholder {
@@ -329,9 +354,21 @@ body {
   gap: $spacing-sm;
 }
 
+.products__labels {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr 1.5fr auto;
+  gap: $spacing-md;
+  padding: 0 $spacing-md;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-text-muted;
+  text-transform: uppercase;
+}
+
 .product-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr 1fr 1.5fr auto;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr 1.5fr auto;
   align-items: center;
   gap: $spacing-md;
   background-color: $color-surface;
@@ -345,7 +382,8 @@ body {
   border: none;
   color: $color-text-muted;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 18px;
+  justify-self: end;
 
   &:hover {
     color: #d32f2f;
@@ -353,13 +391,17 @@ body {
 }
 
 @media (max-width: $breakpoint-tablet) {
+  .products__labels {
+    display: none;
+  }
+
   .product-row {
     grid-template-columns: 1fr;
-    gap: $spacing-sm;
+    gap: 4px;
   }
 
   .product-row__delete {
-    justify-self: flex-start;
+    justify-self: start;
   }
 }
 
@@ -502,3 +544,24 @@ body {
   border-radius: 50%;
   background-color: #4caf50;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.25s ease;
+}
+
+// .products__labels span:nth-child(4),
+// .products__labels span:nth-child(5),
+// .products__labels span:nth-child(6) {
+//   text-align: right;
+// }

@@ -7,6 +7,7 @@ import {
   type ProductFormValues,
 } from "@/lib/validators/productSchema";
 import { useCreateProductMutation } from "@/store/api/productsApi";
+import { useGetOrdersQuery } from "@/store/api/ordersApi";
 import { Modal } from "@/components/ui/Modal/Modal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -24,6 +25,7 @@ export const AddProductForm = ({ onClose }: AddProductFormProps) => {
   });
 
   const [createProduct, { isLoading }] = useCreateProductMutation();
+  const { data: orders } = useGetOrdersQuery();
   const { t } = useLanguage();
 
   const onSubmit = async (data: ProductFormValues) => {
@@ -43,21 +45,27 @@ export const AddProductForm = ({ onClose }: AddProductFormProps) => {
           <p className="product-form__error">{errors.title.message}</p>
         )}
 
-        <input
-          className="product-form__input"
+        <select
           {...register("orderId", { valueAsNumber: true })}
-          type="number"
-          placeholder={t.form.orderIdPlaceholder}
-        />
+          className="product-form__input"
+        >
+          <option value="">{t.orders.selectFromList}</option>
+          {orders?.map((order) => (
+            <option key={order.id} value={order.id}>
+              {order.title}
+            </option>
+          ))}
+        </select>
         {errors.orderId && (
           <p className="product-form__error">{errors.orderId.message}</p>
         )}
 
-        <input
-          className="product-form__input"
-          {...register("type")}
-          placeholder={t.form.typePlaceholder}
-        />
+        <select {...register("type")} className="product-form__input">
+          <option value="">{t.products.allTypes}</option>
+          <option value="Monitors">{t.types.Monitors}</option>
+          <option value="Laptops">{t.types.Laptops}</option>
+          <option value="Keyboards">{t.types.Keyboards}</option>
+        </select>
         {errors.type && (
           <p className="product-form__error">{errors.type.message}</p>
         )}

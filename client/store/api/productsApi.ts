@@ -4,7 +4,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 type ProductFilters = {
   type?: string;
-  specification?: string;
 };
 
 
@@ -18,12 +17,7 @@ export const productsApi = createApi({
     getProducts: builder.query<Product[], ProductFilters>({
       query: (filters = {}) => {
         const params: Record<string, string> = {};
-
         if (filters.type) params.type = filters.type;
-        if (filters.specification) {
-          params.specification = filters.specification;
-        }
-
         return { url: '', params };
       },
       providesTags: ['Product'],

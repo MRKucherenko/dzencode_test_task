@@ -19,7 +19,8 @@ export const translations = {
       price: 'Цена',
       productsCount: 'Продукта',
       selectFromList: 'Выберите позицию из списка слева',
-      confirmDelete: 'Вы уверены, что хотите удалить приход' 
+      confirmDelete: 'Вы уверены, что хотите удалить приход',
+      sum: 'Сумма'
     },
     products: {
       from: 'с',
@@ -48,6 +49,7 @@ export const translations = {
       serialNumberPlaceholder: 'Серийный номер',
       priceUSDPlaceholder: 'Цена в $',
       priceUAHPlaceholder: 'Цена в ₴',
+      guarantee: 'Гарантия',
     },
   },
   en: {
@@ -70,7 +72,8 @@ export const translations = {
       price: 'Price',
       productsCount: 'Products',
       selectFromList: 'Select an item from the list',
-      confirmDelete: 'Are you sure you want to delete order'
+      confirmDelete: 'Are you sure you want to delete order',
+      sum: 'Total'
     },
     products: {
       from: 'from',
@@ -99,6 +102,7 @@ export const translations = {
       serialNumberPlaceholder: 'Serial number',
       priceUSDPlaceholder: 'Price in $',
       priceUAHPlaceholder: 'Price in ₴',
+      guarantee: 'Warranty',
     },
   },
 };

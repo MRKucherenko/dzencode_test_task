@@ -27,7 +27,7 @@ export const Modal = ({ onClose, children }: ModalProps) => {
 
   return (
     <div className="modal-overlay" onClick={closeByClick}>
-      <div className="app-modal">
+      <div className="app-modal fade-in">
         <button className="app-modal__close" type="button" onClick={onClose}>
           ✕
         </button>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export const LiveClock = () => {
-  const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,8 +15,12 @@ export const LiveClock = () => {
 
   return (
     <div className="top-menu__clock">
-      <time className="top-menu__date">{currentTime.toLocaleDateString()}</time>
-      <time className="top-menu__time">{currentTime.toLocaleTimeString()}</time>
+      <time className="top-menu__date" suppressHydrationWarning>
+        {currentTime.toLocaleDateString()}
+      </time>
+      <time className="top-menu__time" suppressHydrationWarning>
+        {currentTime.toLocaleTimeString()}
+      </time>
     </div>
   );
 };

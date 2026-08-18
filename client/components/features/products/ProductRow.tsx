@@ -19,6 +19,12 @@ export const ProductRow = ({ product }: ProductRowProps) => {
   const guaranteeStart = new Date(product.guaranteeStart);
   const guaranteeEnd = new Date(product.guaranteeEnd);
 
+  const guaranteeOptions: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+
   return (
     <div className="product-row">
       <p>{product.title}</p>
@@ -26,6 +32,11 @@ export const ProductRow = ({ product }: ProductRowProps) => {
       <p>
         {t.products.from} {guaranteeStart.toLocaleDateString("ru-RU")}{" "}
         {t.products.to} {guaranteeEnd.toLocaleDateString("ru-RU")}
+        <br />
+        {t.products.from}{" "}
+        {guaranteeStart.toLocaleDateString("ru-RU", guaranteeOptions)}{" "}
+        {t.products.to}{" "}
+        {guaranteeEnd.toLocaleDateString("ru-RU", guaranteeOptions)}
       </p>
       <p>{product.priceUSD} $</p>
       <p>{product.priceUAH} ₴</p>
@@ -35,7 +46,7 @@ export const ProductRow = ({ product }: ProductRowProps) => {
         className="product-row__delete"
         onClick={() => setIsDeleteOpen(true)}
       >
-        {t.common.delete}
+        🗑️
       </button>
 
       {isDeleteOpen && (

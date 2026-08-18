@@ -18,6 +18,12 @@ export const OrderListItem = ({ order, onClick }: OrderListItemProps) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const { t } = useLanguage();
   const date = new Date(order.date);
+  const shortDate = date.toLocaleDateString("ru-RU");
+  const longDate = date.toLocaleDateString("ru-RU", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <div className="order-card">
@@ -26,9 +32,14 @@ export const OrderListItem = ({ order, onClick }: OrderListItemProps) => {
         <p className="order-card__meta">
           {order.productsCount} {t.orders.productsCount}
         </p>
-        <p className="order-card__meta">{date.toLocaleDateString("ru-RU")}</p>
-        <p className="order-card__price">{order.totalPriceUSD} $</p>
-        <p className="order-card__price">{order.totalPriceUAH} ₴</p>
+        <p className="order-card__meta">{shortDate}</p>
+        <p className="order-card__meta">{longDate}</p>
+        <p className="order-card__price">
+          {t.orders.sum}: {order.totalPriceUSD} $
+        </p>
+        <p className="order-card__price">
+          {t.orders.sum}: {order.totalPriceUAH} ₴
+        </p>
         <p className="order-card__description">{order.description}</p>
       </div>
 
@@ -36,7 +47,7 @@ export const OrderListItem = ({ order, onClick }: OrderListItemProps) => {
         className="order-card__delete"
         onClick={() => setIsDeleteOpen(true)}
       >
-        {t.common.delete}
+        🗑️
       </button>
 
       {isDeleteOpen && (

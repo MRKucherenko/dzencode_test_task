@@ -12,24 +12,13 @@ const AddProductForm = dynamic(() =>
 
 export const ProductTable = () => {
   const [type, setType] = useState("");
-  const [specification, setSpecification] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { t } = useLanguage();
 
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useGetProductsQuery({ type, specification });
+  const { data: products, isLoading, error } = useGetProductsQuery({ type });
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setType(event.target.value);
-  };
-
-  const handleSpecificationChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setSpecification(event.target.value);
   };
 
   const handleAddProduct = () => {
@@ -53,23 +42,6 @@ export const ProductTable = () => {
             <option value="Laptops">{t.types.Laptops}</option>
             <option value="Keyboards">{t.types.Keyboards}</option>
           </select>
-
-          <select
-            className="products__filter"
-            value={specification}
-            onChange={handleSpecificationChange}
-          >
-            <option value="">{t.products.allSpecifications}</option>
-            <option value="Specification 1">
-              {t.specifications.Specification1}
-            </option>
-            <option value="Specification 2">
-              {t.specifications.Specification2}
-            </option>
-            <option value="Specification 3">
-              {t.specifications.Specification3}
-            </option>
-          </select>
         </div>
 
         <button
@@ -82,6 +54,15 @@ export const ProductTable = () => {
       </div>
 
       {isFormOpen && <AddProductForm onClose={() => setIsFormOpen(false)} />}
+
+      <div className="products__labels">
+        <span>{t.form.titlePlaceholder}</span>
+        <span>{t.form.typePlaceholder}</span>
+        <span>{t.form.guarantee}</span>
+        <span>{t.form.priceUSDPlaceholder}</span>
+        <span>{t.form.priceUAHPlaceholder}</span>
+        <span>{t.nav.orders}</span>
+      </div>
 
       <div className="products__list">
         {products?.map((product) => (

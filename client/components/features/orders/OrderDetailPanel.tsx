@@ -5,9 +5,13 @@ import { useGetOrderByIdQuery } from "@/store/api/ordersApi";
 
 type OrderDetailPanelProps = {
   orderId: number | null;
-};
+  onClose: () => void;
+}
 
-export const OrderDetailPanel = ({ orderId }: OrderDetailPanelProps) => {
+export const OrderDetailPanel = ({
+  orderId,
+  onClose,
+}: OrderDetailPanelProps) => {
   const { data: order } = useGetOrderByIdQuery(orderId ?? 0, {
     skip: orderId === null,
   });
@@ -22,7 +26,10 @@ export const OrderDetailPanel = ({ orderId }: OrderDetailPanelProps) => {
   }
 
   return (
-    <div className="order-detail">
+    <div key={orderId} className="order-detail fade-in">
+      <button className="order-detail__close" type="button" onClick={onClose}>
+        ✕
+      </button>
       <h2 className="order-detail__title">{order?.title}</h2>
 
       {order?.Products?.map((product) => (

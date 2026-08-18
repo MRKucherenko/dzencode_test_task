@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dzencode_test
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  server:
+    build: ./server
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: dzencode_test
+      DB_USER: root
+      DB_PASSWORD: root
+    depends_on:
+      - mysql
+
+  client:
+    build:
+      context: ./client
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:4000/api
+        NEXT_PUBLIC_SOCKET_URL: http://localhost:4000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+
+volumes:
+  mysql_data:

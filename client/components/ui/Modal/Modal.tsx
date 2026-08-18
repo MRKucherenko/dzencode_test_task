@@ -26,11 +26,12 @@ export const Modal = ({ onClose, children }: ModalProps) => {
   };
 
   return (
-    <div onClick={closeByClick}>
-      <div>
-        <button type="button" onClick={onClose}></button>
-
-        <div>{children}</div>
+    <div className="modal-overlay" onClick={closeByClick}>
+      <div className="app-modal">
+        <button className="app-modal__close" type="button" onClick={onClose}>
+          ✕
+        </button>
+        <div className="app-modal__body">{children}</div>
       </div>
     </div>
   );

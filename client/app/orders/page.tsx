@@ -8,12 +8,9 @@ export default function OrdersPage() {
   const [selectedOrderId, setSelectedOrderId] = useState<number | null>(null);
 
   return (
-    <>
-      <OrdersList
-        selectedOrderId={selectedOrderId}
-        onSelectOrder={setSelectedOrderId}
-      />
+    <div className="orders">
+      <OrdersList onSelectOrder={setSelectedOrderId} />
       <OrderDetailPanel orderId={selectedOrderId} />
-    </>
+    </div>
   );
-}
+};

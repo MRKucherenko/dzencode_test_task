@@ -20,19 +20,24 @@ export const OrderListItem = ({ order, onClick }: OrderListItemProps) => {
   const date = new Date(order.date);
 
   return (
-    <div>
-      <div onClick={onClick}>
-        <p>{order.title}</p>
-        <p>
+    <div className="order-card">
+      <div className="order-card__body" onClick={onClick}>
+        <p className="order-card__title">{order.title}</p>
+        <p className="order-card__meta">
           {order.productsCount} {t.orders.productsCount}
         </p>
-        <p>{date.toLocaleDateString("ru-RU")}</p>
-        <p>{order.totalPriceUSD} $</p>
-        <p>{order.totalPriceUAH} ₴</p>
-        <p>{order.description}</p>
+        <p className="order-card__meta">{date.toLocaleDateString("ru-RU")}</p>
+        <p className="order-card__price">{order.totalPriceUSD} $</p>
+        <p className="order-card__price">{order.totalPriceUAH} ₴</p>
+        <p className="order-card__description">{order.description}</p>
       </div>
 
-      <button onClick={() => setIsDeleteOpen(true)}>{t.common.delete}</button>
+      <button
+        className="order-card__delete"
+        onClick={() => setIsDeleteOpen(true)}
+      >
+        {t.common.delete}
+      </button>
 
       {isDeleteOpen && (
         <ConfirmDeleteOrder

@@ -20,20 +20,23 @@ export const ProductRow = ({ product }: ProductRowProps) => {
   const guaranteeEnd = new Date(product.guaranteeEnd);
 
   return (
-    <div>
-      <div>
-        <p>{product.title}</p>
-        <p>{product.type}</p>
-        <p>
-          {t.products.from} {guaranteeStart.toLocaleDateString("ru-RU")}{" "}
-          {t.products.to} {guaranteeEnd.toLocaleDateString("ru-RU")}
-        </p>
-        <p>{product.priceUSD} $</p>
-        <p>{product.priceUAH} ₴</p>
-        <p>{product.Order?.title}</p>
-      </div>
+    <div className="product-row">
+      <p>{product.title}</p>
+      <p>{product.type}</p>
+      <p>
+        {t.products.from} {guaranteeStart.toLocaleDateString("ru-RU")}{" "}
+        {t.products.to} {guaranteeEnd.toLocaleDateString("ru-RU")}
+      </p>
+      <p>{product.priceUSD} $</p>
+      <p>{product.priceUAH} ₴</p>
+      <p>{product.Order?.title}</p>
 
-      <button onClick={() => setIsDeleteOpen(true)}>{t.common.delete}</button>
+      <button
+        className="product-row__delete"
+        onClick={() => setIsDeleteOpen(true)}
+      >
+        {t.common.delete}
+      </button>
 
       {isDeleteOpen && (
         <ConfirmDeleteProduct

@@ -25,11 +25,21 @@ export const ConfirmDeleteOrder = ({
 
   return (
     <Modal onClose={onClose}>
-      <p>{t.orders.confirmDelete} {orderTitle}?</p>
-      <button onClick={onClose}>{t.common.cancel}</button>
-      <button onClick={handleDelete} disabled={isLoading}>
-        {t.common.delete}
-      </button>
+      <p className="app-modal__text">
+        {t.orders.confirmDelete} {orderTitle}?
+      </p>
+      <div className="app-modal__actions">
+        <button className="app-modal__button--secondary" onClick={onClose}>
+          {t.common.cancel}
+        </button>
+        <button
+          className="app-modal__button--primary"
+          onClick={handleDelete}
+          disabled={isLoading}
+        >
+          {t.common.delete}
+        </button>
+      </div>
     </Modal>
   );
 };

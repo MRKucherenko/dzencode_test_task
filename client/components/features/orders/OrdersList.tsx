@@ -2,23 +2,23 @@
 
 import { useGetOrdersQuery } from "@/store/api/ordersApi";
 import { OrderListItem } from "./OrderListItem";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 type OrdersListProps = {
-  selectedOrderId: number | null;
   onSelectOrder: (id: number) => void;
 };
 
 export const OrdersList = ({
-  selectedOrderId,
   onSelectOrder,
 }: OrdersListProps) => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
+  const { t } = useLanguage();
 
-  if (isLoading) return <>Загрузка</>;
-  if (error) return <>Ошибка загрузки</>;
+  if (isLoading) return <>{t.common.loading}</>;
+  if (error) return <>{t.common.loadError}</>;
 
   return (
-    <>
+    <div className="orders__list">
       {orders?.map((order) => (
         <OrderListItem
           key={order.id}
@@ -26,6 +26,6 @@ export const OrdersList = ({
           onClick={() => onSelectOrder(order.id)}
         />
       ))}
-    </>
+    </div>
   );
 };

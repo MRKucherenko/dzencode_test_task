@@ -12,7 +12,8 @@ export const translations = {
       cancel: 'Отменить',
       loading: 'Загрузка',
       loadError: 'Ошибка загрузки',
-      add: 'Добавить' 
+      add: 'Добавить',
+      adding: 'Добавление',
     },
     orders: {
       price: 'Цена',
@@ -39,6 +40,15 @@ export const translations = {
       Specification2: 'Спецификация 2',
       Specification3: 'Спецификация 3',
     },
+    form: {
+      titlePlaceholder: 'Название',
+      orderIdPlaceholder: 'ID прихода',
+      typePlaceholder: 'Тип',
+      specificationPlaceholder: 'Спецификация',
+      serialNumberPlaceholder: 'Серийный номер',
+      priceUSDPlaceholder: 'Цена в $',
+      priceUAHPlaceholder: 'Цена в ₴',
+    },
   },
   en: {
     nav: {
@@ -53,7 +63,8 @@ export const translations = {
       cancel: 'Cancel',
       loading: 'Loading',
       loadError: 'Failed to load',
-      add: 'Add' 
+      add: 'Add',
+      adding: 'Adding',
     },
     orders: {
       price: 'Price',
@@ -68,18 +79,27 @@ export const translations = {
       serialNumber: 'Serial number:',
       allSpecifications: 'All specifications',
       confirmDelete: 'Are you sure you want to delete product',
-      addProduct: 'Add product' 
+      addProduct: 'Add product'
     },
     types: {
       Monitors: 'Monitors',
       Laptops: 'Laptops',
       Keyboards: 'Keyboards',
-},
+    },
     specifications: {
       Specification1: 'Specification 1',
       Specification2: 'Specification 2',
       Specification3: 'Specification 3',
-},
+    },
+    form: {
+      titlePlaceholder: 'Title',
+      orderIdPlaceholder: 'Order ID',
+      typePlaceholder: 'Type',
+      specificationPlaceholder: 'Specification',
+      serialNumberPlaceholder: 'Serial number',
+      priceUSDPlaceholder: 'Price in $',
+      priceUAHPlaceholder: 'Price in ₴',
+    },
   },
 };
 

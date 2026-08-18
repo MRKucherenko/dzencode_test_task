@@ -15,9 +15,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en">
       <body>
         <Providers>
-          <Sidebar />
-          <TopMenu />
-          {children}
+          <div className="layout">
+            <input type="checkbox" id="nav-toggle" className="nav-toggle" />
+            <Sidebar />
+            <label htmlFor="nav-toggle" className="sidebar-overlay" />
+            <div className="layout__main">
+              <TopMenu />
+              <main className="layout__content">{children}</main>
+            </div>
+          </div>
         </Providers>
       </body>
     </html>

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 export const SessionCounter = () => {
   const [sessionCount, setSessionCount] = useState<number>(0);
@@ -9,7 +9,7 @@ export const SessionCounter = () => {
   useEffect(() => {
     const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
 
-    socket.on('sessionCount', (count: number) => {
+    socket.on("sessionCount", (count: number) => {
       setSessionCount(count);
     });
 
@@ -17,6 +17,10 @@ export const SessionCounter = () => {
       socket.disconnect();
     };
   }, []);
-
-  return <div>{sessionCount}</div>;
+  return (
+    <div className="top-menu__sessions">
+      <span className="top-menu__sessions-dot" />
+      <span>{sessionCount}</span>
+    </div>
+  );
 };

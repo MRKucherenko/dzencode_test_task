@@ -8,6 +8,7 @@ import {
 } from "@/lib/validators/productSchema";
 import { useCreateProductMutation } from "@/store/api/productsApi";
 import { Modal } from "@/components/ui/Modal/Modal";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 type AddProductFormProps = {
   onClose: () => void;
@@ -23,6 +24,7 @@ export const AddProductForm = ({ onClose }: AddProductFormProps) => {
   });
 
   const [createProduct, { isLoading }] = useCreateProductMutation();
+  const { t } = useLanguage();
 
   const onSubmit = async (data: ProductFormValues) => {
     await createProduct(data);
@@ -31,46 +33,80 @@ export const AddProductForm = ({ onClose }: AddProductFormProps) => {
 
   return (
     <Modal onClose={onClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("title")} placeholder="Название" />
-        {errors.title && <p>{errors.title.message}</p>}
+      <form className="product-form" onSubmit={handleSubmit(onSubmit)}>
+        <input
+          className="product-form__input"
+          {...register("title")}
+          placeholder={t.form.titlePlaceholder}
+        />
+        {errors.title && (
+          <p className="product-form__error">{errors.title.message}</p>
+        )}
 
         <input
+          className="product-form__input"
           {...register("orderId", { valueAsNumber: true })}
           type="number"
-          placeholder="ID прихода"
+          placeholder={t.form.orderIdPlaceholder}
         />
-        {errors.orderId && <p>{errors.orderId.message}</p>}
-
-        <input {...register("type")} placeholder="Тип" />
-        {errors.type && <p>{errors.type.message}</p>}
-
-        <input {...register("specification")} placeholder="Спецификация" />
-        {errors.specification && <p>{errors.specification.message}</p>}
+        {errors.orderId && (
+          <p className="product-form__error">{errors.orderId.message}</p>
+        )}
 
         <input
+          className="product-form__input"
+          {...register("type")}
+          placeholder={t.form.typePlaceholder}
+        />
+        {errors.type && (
+          <p className="product-form__error">{errors.type.message}</p>
+        )}
+
+        <input
+          className="product-form__input"
+          {...register("specification")}
+          placeholder={t.form.specificationPlaceholder}
+        />
+        {errors.specification && (
+          <p className="product-form__error">{errors.specification.message}</p>
+        )}
+
+        <input
+          className="product-form__input"
           {...register("serialNumber", { valueAsNumber: true })}
           type="number"
-          placeholder="Серийный номер"
+          placeholder={t.form.serialNumberPlaceholder}
         />
-        {errors.serialNumber && <p>{errors.serialNumber.message}</p>}
+        {errors.serialNumber && (
+          <p className="product-form__error">{errors.serialNumber.message}</p>
+        )}
 
         <input
+          className="product-form__input"
           {...register("priceUSD", { valueAsNumber: true })}
           type="number"
-          placeholder="Цена в $"
+          placeholder={t.form.priceUSDPlaceholder}
         />
-        {errors.priceUSD && <p>{errors.priceUSD.message}</p>}
+        {errors.priceUSD && (
+          <p className="product-form__error">{errors.priceUSD.message}</p>
+        )}
 
         <input
+          className="product-form__input"
           {...register("priceUAH", { valueAsNumber: true })}
           type="number"
-          placeholder="Цена в ₴"
+          placeholder={t.form.priceUAHPlaceholder}
         />
-        {errors.priceUAH && <p>{errors.priceUAH.message}</p>}
+        {errors.priceUAH && (
+          <p className="product-form__error">{errors.priceUAH.message}</p>
+        )}
 
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Добавление..." : "Добавить"}
+        <button
+          className="product-form__submit"
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? t.common.adding : t.common.add}
         </button>
       </form>
     </Modal>

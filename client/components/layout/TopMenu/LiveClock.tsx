@@ -14,9 +14,9 @@ export const LiveClock = () => {
   }, []);
 
   return (
-    <div>
-      <time>{currentTime.toLocaleDateString()}</time>
-      <time>{currentTime.toLocaleTimeString()}</time>
+    <div className="top-menu__clock">
+      <time className="top-menu__date">{currentTime.toLocaleDateString()}</time>
+      <time className="top-menu__time">{currentTime.toLocaleTimeString()}</time>
     </div>
   );
 };
